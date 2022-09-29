@@ -18,15 +18,11 @@ class Trabalho{
 
         return $this;
     }
-    public function addAvaliacao(Avaliacao $Avaliacao){
+    public function setAvaliacao(Avaliacao $Avaliacao){
         $this->avaliacao[] = $Avaliacao;
     }
-    public function getavaliacao(){
+    public function getAvaliacao(){
         return $this->avaliacao;
-    }
-    public function __toString(){
-        return "Titulo". $this->getTitulo."<br>".
-        "Nota".$this->getavaliacao()->getnota."<br>";
     }
 }
 

@@ -15,7 +15,7 @@ Class Campus{
         $this->nome = $nome;
     }
     public  function getEndereco(){
-        return $this->enndereco;
+        return $this->endereco;
     }
     public function setEndereco(){
         $this->endereco = $endereco;

@@ -1,11 +1,13 @@
 <?php
-require_once('Edicao.class.php');
-require_once('Campus.class.php');
+require_once ('Aluno.class.php');
+require_once ('Trabalho.class.php');
 
-$rds = new Campus ('IFC','Rio do Sul');
+$trab = new Trabalho('titulo','nome','curso');
 
-$fetec = new Edicao(2022,$rds);
 
-echo $fetec->getCampus()->getNome();
+foreach ($trab->getAluno() as $alunos){
+    echo "Alunos:".$aluno->getNome()."Curso: ".$aluno->getCurso()."\n";
+}
 
+print_r($trab);
 ?>
