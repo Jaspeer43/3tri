@@ -14,17 +14,17 @@
         private $email;
         private $senha;
         private $avor;
-        private $edicao_id;
+        private $escola_idescola;
 
 
         //constrói as variáveis.
-        public function __construct($id, $nome, $sobrenome, $atuacao, $foto, $email, $senha, $edicao_id, $avor){
+        public function __construct($id, $nome, $sobrenome, $atuacao, $foto, $email, $senha, $escola_idescola, $avor){
             parent::__construct($id, $nome, $sobrenome);
             $this->setAtuacao($atuacao);
             $this->setFoto($foto);
             $this->setEmail($email);
             $this->setSenha($senha);
-            $this->setEscola($edicao_id);
+            $this->setEscola($escola_idescola);
             $this->setAvor($avor);
         }
 
@@ -42,8 +42,8 @@
         public function getSenha() { return $this->senha; }
         public function setSenha($senha) { $this->senha = $senha; }
 
-        public function getEscola() { return $this->edicao_id; }
-        public function setEscola($edicao_id) { $this->edicao_id = $edicao_id; }
+        public function getEscola() { return $this->escola_idescola; }
+        public function setEscola($escola_idescola) { $this->escola_idescola = $escola_idescola; }
 
         public function getAvor() { return $this->avor; }
         public function setAvor($avor) { $this->avor = $avor; }
@@ -60,8 +60,8 @@
         }
 
         public function insere(){
-            $sql = 'INSERT INTO fetec.orientador (nome, sobrenome, atuacao, foto, email, senha, edicao_id, avor) 
-            VALUES(:nome, :sobrenome, :atuacao, :foto, :email, :senha, :edicao_id, :avor)';
+            $sql = 'INSERT INTO fetec.orientador (nome, sobrenome, atuacao, foto, email, senha, escola_idescola, avor) 
+            VALUES(:nome, :sobrenome, :atuacao, :foto, :email, :senha, :escola_idescola, :avor)';
             $parametros = array(":nome"=>$this->getNome(), 
                                 ":sobrenome"=>$this->getSobrenome(),
                                 ":atuacao"=>$this->getAtuacao(),
@@ -81,7 +81,7 @@
 
         public function editar(){
             $sql = 'UPDATE fetec.orientador 
-            SET nome = :nome, sobrenome = :sobrenome, atuacao = :atuacao, foto = :foto, email = :email, senha = :senha, edicao_id = :edicao_id
+            SET nome = :nome, sobrenome = :sobrenome, atuacao = :atuacao, foto = :foto, email = :email, senha = :senha, escola_idescola = :escola_idescola
             WHERE id = :id';
             $parametros = array(":nome"=>$this->getNome(),
                                 ":sobrenome"=>$this->getSobrenome(),
@@ -96,7 +96,7 @@
         public static function listar($buscar = 0, $procurar = ""){
             //cria conexão e seleciona as informações do usário.
             $pdo = Conexao::getInstance();
-            $consulta = "SELECT * FROM edicao, orientador WHERE orientador.edicao_id = edicao.id AND edicao.campus_id = ".$_SESSION['id']."" ;
+            $consulta = "SELECT * FROM escola, orientador WHERE orientador.escola_idescola = escola.id AND escola.id = ".$_SESSION['id']."" ;
             if($buscar > 0)
                 switch($buscar){
                     //se sobrenome da consulta for por id, mostra as informações de afotodo com aquele id.
@@ -120,7 +120,7 @@
         }
         
         public static function efetuarLogin($email, $senha){
-            $sql = "SELECT id, nome, sobrenome, atuacao, foto, edicao_id FROM orientador WHERE email = :email AND senha = :senha";
+            $sql = "SELECT id, nome, sobrenome, atuacao, foto, escola_idescola FROM orientador WHERE email = :email AND senha = :senha";
             $parametros = array(
                 ':email' => $email,
                 ':senha' => $senha,
@@ -133,7 +133,7 @@
                 $_SESSION['sobrenome'] = self::buscar($sql, $parametros)[0]['sobrenome'];
                 $_SESSION['atuacao'] = self::buscar($sql, $parametros)[0]['atuacao'];
                 $_SESSION['foto'] = self::buscar($sql, $parametros)[0]['foto'];
-                $_SESSION['edicao_id'] = self::buscar($sql, $parametros)[0]['edicao_id'];
+                $_SESSION['escola_idescola'] = self::buscar($sql, $parametros)[0]['escola_idescola'];
                 return true;
             } else {
                 $_SESSION['id'] = "";
@@ -141,7 +141,7 @@
                 $_SESSION['sobrenome'] = "";
                 $_SESSION['atuacao'] = "";
                 $_SESSION['foto'] = "";
-                $_SESSION['edicao_id'] = "";
+                $_SESSION['escola_idescola'] = "";
                 return false;
             }
         }
