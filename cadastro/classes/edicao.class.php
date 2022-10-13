@@ -14,7 +14,7 @@
 
 
         //constrói as variáveis.
-        public function __construct($id, $ano, Campus $campus){
+        public function __construct($id, $ano, $campus){
             parent::__construct($id);
             $this->setAno($ano);
             $this->setCampus($campus);
@@ -35,16 +35,6 @@
                     "Campus: ".$this->getCampus()->getId()."<br>";
         }
 
-        public function editar(){
-            $sql = 'UPDATE fetec.edicao 
-            SET ano = :ano, campus_id = :campus_id
-            WHERE id = :id';
-            $parametros = array(":ano"=>$this->getAno(),
-                                ":campus_id"=>$this->getCampus()->getId(),  
-                                ":id"=>$this->getId());
-            return parent::executaComando($sql,$parametros);
-        }
-
         public function insere(){
             $sql = 'INSERT INTO fetec.edicao (ano, campus_id) 
             VALUES(:ano, :campus_id)';
@@ -59,20 +49,28 @@
             return parent::executaComando($sql,$parametros);
         }
 
+        public function editar(){
+            $sql = 'UPDATE fetec.edicao 
+            SET ano = :ano, campus_id = :campus_id
+            WHERE id = :id';
+            $parametros = array(":ano"=>$this->getAno(),
+                                ":campus_id"=>$this->getCampus()->getId(),  
+                                ":id"=>$this->getId());
+            return parent::executaComando($sql,$parametros);
+        }
+
         public static function listar($buscar = 0, $procurar = ""){
             //cria conexão e seleciona as informações do usário.
             $pdo = Conexao::getInstance();
-            $consulta = "SELECT * FROM edicao" ;
-            if($buscar > 0)
-                switch($buscar && $procurar != ""){
+            $consulta = "SELECT * FROM edicao";
+            if($buscar > 0 && $procurar <> ""){
+                switch($buscar){
                     case(1): $consulta .= " WHERE edicao.id = :procurar"; break;
                     case(2): $consulta .= " WHERE ano LIKE :procurar"; "%".$procurar .="%"; break;
-                    case(3): $consulta .= " WHERE campus_id LIKE :procurar"; "%".$procurar .="%"; break;
+                    case(3): $consulta .= " WHERE campus_id = :procurar"; break;
                 }
-
-            if ($buscar > 0)
                 $parametros = array(':procurar'=>$procurar);
-            else 
+            } else
                 $parametros = array();
             return parent::buscar($consulta, $parametros);
         }

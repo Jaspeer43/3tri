@@ -74,7 +74,7 @@
 
         public function editar(){
             $sql = 'UPDATE fetec.avaliador 
-            SET nome = :nome, sobrenome = :sobrenome, atuacao = :atuacao, email = :email, senha = :senha, edicao_id = :edicao_id
+            SET nome = :nome, sobrenome = :sobrenome, atuacao = :atuacao, edicao_id = :edicao_id, avor = :avor, email = :email, senha = :senha
             WHERE id = :id';
             $parametros = array(":nome"=>$this->getNome(),
                                 ":sobrenome"=>$this->getSobrenome(),
