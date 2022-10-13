@@ -7,6 +7,7 @@
     $procurar = isset($_GET["procurar"]) ? $_GET["procurar"] : ""; 
     $tipo = isset($_GET["tipo"]) ? $_GET["tipo"] : ""; 
 
+    $dados = buscarDados($_SESSION["id"], "orientador");
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,10 +43,10 @@
                         <a href="Vtrabalho.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link">Trabalhos Cadastrados</a>
                     </li>
                     <li class="nav__item">
-                        <a href="edita.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link">Editar My Info</a>
+                        <a href="edita.php?id=<?php echo $_SESSION['id']; ?>&processa=editar&obj=orientador" class="nav__link">Editar Perfil</a>
                     </li>
                     <li class="nav__item">
-                        <a href="../index.html" class="nav__link">Sair</a>
+                        <a href="inicialL.php" class="nav__link">Sair</a>
                     </li>
                 </ul>
 
@@ -70,7 +71,7 @@
 
     <section class="subscribe section" style="margin-top:8%;"> 
         <div class="subscribe__bg"> <div class="subscribe__container container" style="padding: 5%;"> 
-                    <h1 class="home__data-title" style="text-shadow: black 0.1em 0.1em 0.3em;">Bem-Vindo(a)<b><br> <p> <?php echo $_SESSION['nome'];?>!</p></b></h1>
+                    <h1 class="home__data-title" style="text-shadow: black 0.1em 0.1em 0.3em;">Bem-Vindo(a)<b><br> <p> <?php echo $dados["nome"];?>!</p></b></h1>
 </div>
                 </div>
                 </div>

@@ -45,9 +45,11 @@
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
                     <li class="nav__item">
-                        <a href="inicialL.php" class="nav__link">Inicial Campus</a>
+                        <a href="inicialL.php" class="nav__link" style=" font-size:90%;">Inicial Campus</a>
                     </li>
-                    
+                    <li class="nav__item">
+                        <a href="editaC.php" class="nav__link active-link" style=" font-size:90%;">Informações</a>
+                    </li>
                 </ul>
 
                 <div class="nav__dark">
@@ -98,7 +100,7 @@
         <button name="processa1" id="processa1" value="cadastrar" type="submit" style="float: left;" class="button">EDITAR</button>
 
     </form>
-    <a href="processa1.php?processa1=excluir&id=<?php echo $_SESSION['id'];?>">EXCLUIR</a>
+    <button style="float: right;" class="button"><a href="processa1.php?processa1=excluir&id=<?php echo $_SESSION['id'];?>">EXCLUIR</a></button>
     </section>
 
 </section>
@@ -120,6 +122,8 @@
 
 <!--=============== MAIN JS ===============-->
 <script src="assets/js/main.js"></script>
+
+
 </body>
 
 </html>

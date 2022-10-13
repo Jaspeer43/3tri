@@ -1,18 +1,19 @@
 <?php
     session_set_cookie_params(0);
     session_start();
-    require_once "classes/edicao.class.php";
+    require_once "classes/trabalho.class.php";
     require_once  "conf/Conexao.php";
+    require_once  "processa3.php";
+    $procurar = isset($_GET["procurar"]) ? $_GET["procurar"] : ""; 
+    $tipo = isset($_GET["tipo"]) ? $_GET["tipo"] : ""; 
 
-    
-    $idCampus = isset($_GET["id"]) ? $_GET["id"] : 0;
-    $title = "Edições";
+    $title = "Trabalhos cadastrados";
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/img/if.png" type="image/png">
     <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -31,10 +32,10 @@
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
                     <li class="nav__item">
-                        <a href="inicialL.php" class="nav__link" style=" font-size:90%;">Inicial Campus</a>
+                        <a href="orientador.php" class="nav__link" style=" font-size:90%;">Inicial Orientadpr</a>
                     </li>
                     <li class="nav__item">
-                        <a href="editaC.php" class="nav__link active-link" style=" font-size:90%;">Edições Antigas</a>
+                        <a href="Vtrabalho.php" class="nav__link active-link" style=" font-size:90%;">Trabalhos cadastrados</a>
                     </li>
                 </ul>
 
@@ -55,7 +56,6 @@
         </nav>
     </header>
 
-
     <main class="main">
         <!--==================== HOME ====================-->
         <section class="home" id="home">
@@ -65,29 +65,31 @@
 
         <div  class="subscribe__container" style=" padding:5%; margin:10%;"> 
 
-                <center><h2 class="subscribe__title" style="">Edite a Edição</h2></center>  
+                <center><h2 class="subscribe__title" style="">Aqui estão os trabalhos que você orienta</h2></center>  
 
-	
-	
   <br>
     <table style="width:100%;">
             <tr>
-                <td style="font-size:100%; width: 70%; background: white; padding:0.8%; "><b>Ano</b></td>
-                <td style="font-size:100%; width: 70%; background: white; padding:0.8%; "><b>Editar</b></td>
+                <td  style="font-size:100%; width: 20%; background: white; padding:0.8%; "><b>Título</b></td>
+                <td  style="font-size:100%; width: 20%; background: white; padding:0.8%; "><b>Curso</b></td>
+                <td  style="font-size:100%; width: 20%; background: white; padding:0.8%; "><b>Estágio</b></td>
+                <td  style="font-size:100%; width: 20%; background: white; padding:0.8%; "><b>Orientador</b></td>
+                <td  style="font-size:100%; width: 20%; background: white; padding:0.8%; "><b>Editar</b></td>
             </tr>
 
-<?php
-    // $buscar = 3 = campus_id
-    $lista = Edicao::listar(3, $idCampus);
+<?php  
+    $lista = Trabalho::listar($tipo, $procurar);
         foreach ($lista as $linha) {
-    ?>  
-   
+    ?>
         <tr>
-            <th scope="row" style="background-color: white;padding-left:0.8%;  text-align: left;"><?php echo $linha['ano'];?></th>
-            <td style="color:dark green; background-color: #fffff0; align-text: center;"><button class="button" style="width: 100%;"><a href='editaE.php?processaEE=editar&id=<?php echo $linha['id'];?>'>EDITAR</a></button></td>
+            <th scope="row" style="background-color: white;padding-left:0.8%;  text-align: left;"><?php echo $linha['titulo'];?></th>
+            <th scope="row" style="background-color: white;padding-left:0.8%;  text-align: left;"><?php echo $linha['curso'];?></th>
+            <th scope="row" style="background-color: white;padding-left:0.8%;  text-align: left;"><?php echo $linha['estagio'];?></th>
+            <th scope="row" style="background-color: white;padding-left:0.8%;  text-align: left;"><?php echo $linha['nome'];?></th>
+
+            <td style="color:dark green; background-color: #fffff0; align-text: center;"><button class="button" style="width: 100%;"><a href='editaT.php?processa3=editar&id=<?php echo $linha['id'];?>'>EDITAR</a></button></td>
         </tr>
             <?php } ?> 
-    
             </section>
 
 </section>

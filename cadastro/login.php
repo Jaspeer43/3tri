@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<?php 
+<?php
+    session_set_cookie_params(0);
+    session_start();
+
     require_once "classes/orientador.class.php";
     require_once "classes/avaliador.class.php";
     require_once  "conf/Conexao.php";
@@ -19,7 +22,7 @@
         </head>
         <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
         <link rel="stylesheet" href="assets/css/style.css"> 
-        <title><?php echo $title ?></title>
+        <title><?php echo $title; ?></title>
     </head>
 
 <body>
@@ -29,11 +32,11 @@
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
                         <li class="nav__item">
-                            <a href="../index.html" class="nav__link">Inicial</a>
+                            <a href="inicialL.php" class="nav__link" style=" font-size:90%;">Inicial Campus</a>
                         </li>
                         
                         <li class="nav__item">
-                            <a href="login.php" class="nav__link active-link">Coordenação</a>
+                            <a href="login.php?id=<?php echo $_SESSION["id"]; ?>" class="nav__link active-link" style=" font-size:90%;">Coordenação</a>
                         </li>
                     </ul>
 
@@ -61,6 +64,7 @@
             <h2 class="section__title subscribe__title"> Conecte a sua<br>Orientador ou Avaliador</h2>
             
 
+
     <form method="post" action="processa.php?processa=login">
         <input type="hidden" name="id" id="id" size="25" value="0">
         <input type="email" name="email" id="email" required class="subscribe__form subscribe__input" placeholder="Email" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;">
@@ -70,18 +74,22 @@
             <option name="orientador" id="orientador" class="subscribe__form subscribe__input" placeholder="Id" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;" value="orientador">Orientador</option>
             <option name="avaliador" id="avaliador" class="subscribe__form subscribe__input" placeholder="Id" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;" value="avaliador">Avaliador</option>
         </select>
-        <br><br>    
-        <button name="login" id="login" value="login" type="submit" class="button" style="float:right;">REALIZAR LOGIN</button>
+        <br>
+        <center><button name="login" id="login" value="login" type="submit" class="button">REALIZAR LOGIN</button></center>
+    </section> 
+       
+
+        
     </form>
     </div>
 </div>  
-    </section>
+    
 
     <a href="#" class="scrollup" id="scroll-up" aria-label="scroll up">
         <i class='bx bx-up-arrow-alt scrollup__icon'></i>
     </a>
 
-       
+
         <script src="assets/js/scrollreveal.min.js"></script>
         <script src="assets/js/swiper-bundle.min.js"></script>
         <script src="assets/js/main.js"></script>

@@ -4,16 +4,18 @@
     session_start();
     require_once "classes/edicao.class.php";
     require_once  "conf/Conexao.php";
-    require_once  "processa2.php";
+    include_once "utils.php";
+    require_once  "processaEE.php";
+
     
-    // $processa2 = isset($_POST['processa2']) ? $_POST['processa2'] : "";
-    $processa2 = isset($_GET["processa2"]) ? $_GET["processa2"] : "";
-    if ($processa2 == 'editar'){
+    $processaEE = isset($_POST['processaEE']) ? $_POST['processaEE'] : "";
+    $processaEE = isset($_GET["processaEE"]) ? $_GET["processaEE"] : "";
+    if ($processaEE == 'editar'){
         // $id = isset($_POST['id']) ? $_POST['id'] : "";
         $id = isset($_GET['id']) ? $_GET['id'] : "";
         if ($id > 0)
-            $dados = buscarDados($id);
-}
+            $dados = buscarDadosEdicao($id);
+    }
 
     $title = "Editar | Edição";
 ?>
@@ -76,25 +78,24 @@
           
         <section class="subscribe section" style="margin-top:1%;"> 
         <div class="subscribe__bg"> <div class="subscribe__container container" style="padding: 5%;"> 
-                <h2 class="section__title subscribe__title">Edite seu Campus</h2>
+                <h2 class="section__title subscribe__title">Edite edição da FETEC</h2>
 
 
     <!--
-        No "processa2.php", a variável $processa2 só recebe o valor "cadastrar" se apertar no botão "CADASTRAR". Se apertar a tecla Enter, não recebe
+        No "processaEE.php", a variável $processaEE só recebe o valor "cadastrar" se apertar no botão "CADASTRAR". Se apertar a tecla Enter, não recebe
     -->
-    <form method="post" action="processa2.php" >
-        <input type="text" readonly name="id" id="id" size="25" value="<?php if ($processa2 == "editar") echo $dados['id']; ?>" class="subscribe__form subscribe__input" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;">
+    <form method="post" action="processaEE.php">
+        <input type="text" readonly name="id" id="id" size="25" value="<?php if ($processaEE == "editar") echo $dados['id']; ?>" class="subscribe__form subscribe__input" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;">
 
-        <input type="text" name="ano" id="ano" value="<?php if ($processa2 == "editar") echo $dados['ano']; ?>" class="subscribe__form subscribe__input" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;">
+        <input type="text" name="ano" id="ano" value="<?php if ($processaEE == "editar") echo $dados['ano']; ?>" class="subscribe__form subscribe__input" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;">
         
-        <input type="text" readonly name="campus_id" id="campus_id" value="<?php if ($processa2 == "editar") echo $dados['campus_id']; ?>" class="subscribe__form subscribe__input" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;">
+        <input type="text" readonly name="campus_id" id="campus_id" value="<?php if ($processaEE == "editar") echo $dados['campus_id']; ?>" class="subscribe__form subscribe__input" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;">
 
         <br>
 
-        <button name="processa2" id="processa2" value="cadastrar" type="submit" style="float: left;" class="button">EDITAR</button>
-
+        <button name="processaEE" id="processaEE" value="cadastrar" type="submit" style="float: left;" class="button">EDITAR</button>
+        <button name="processaEE" id="processaEE" value="excluir" type="submit" style="float: left;" class="button">EXCLUIR</button>
     </form>
-    <a href="processa2.php?processa2=excluir&id=<?php echo $dados['id'];?>">EXCLUIR EDIÇÃO</a>
     </section>
 
 </section>
@@ -116,6 +117,11 @@
 
 <!--=============== MAIN JS ===============-->
 <script src="assets/js/main.js"></script>
+
+<script src="assets/js/jQuery/jquery.js"></script>
+
+<script src="assets/js/jquery.js"></script>
+
 </body>
 
 </html>

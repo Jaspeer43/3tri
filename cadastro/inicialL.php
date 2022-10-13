@@ -4,9 +4,8 @@
     require_once "autoload.php";
     require_once  "conf/Conexao.php";
     require_once  "processa1.php";
-    $procurar = isset($_GET["procurar"]) ? $_GET["procurar"] : ""; 
-    $tipo = isset($_GET["tipo"]) ? $_GET["tipo"] : ""; 
-
+    
+    $dados = buscarDados($_SESSION["id"]);
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,34 +27,48 @@
     <body>
     <header class="header" id="header">
         <nav class="nav container">
-            <a href="#" class="nav__logo">FETEC</a>
+          
 
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
                     <li class="nav__item">
-                        <a href="#home" class="nav__link active-link">Inicial Campus</a>
+                        <center>
+                        <a href="#home" class="nav__link active-link" style=" font-size:90%;">Inicial Campus</a>
+                        </center>
                     </li>
                     <li class="nav__item">
-                        <a href="edicao.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link">Nova Edição</a>
+                        <center>
+                        <a href="edicao.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link" style=" font-size:90%;">Nova Edição</a>
+                        </center>
                     </li>
                     
                     <li class="nav__item">
-                        <a href="edicoes.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link">Edições</a>
+                        <center>
+                        <a href="edicoes.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link" style=" font-size:90%;">Edições Antigas</a>
+                        </center>
                     </li>
 
                     <li class="nav__item">
-                        <a href="cadastro.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link">Cadastrar Organizadores</a>
+                        <center>
+                        <a href="cadastro.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link" style=" font-size:90%;">Cadastro</a>
+                        </center>
                     </li>
 
                     <li class="nav__item">
-                        <a href="login.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link">Login Organizadores</a>
+                        <center>
+                        <a href="login.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link" style=" font-size:90%;">Coordenação</a>
+                        </center>
                     </li>
 
                     <li class="nav__item">
-                        <a href="editaC.php?id=<?php echo $_SESSION['id']; ?>&processa1=editar" class="nav__link">Editar</a>
+                        <center>
+                        <a href="editaC.php?id=<?php echo $_SESSION['id']; ?>&processa1=editar" class="nav__link" style=" font-size:90%;">Informações</a>
+                        </center>
                     </li>
                     <li class="nav__item">
-                        <a href="../index.html" class="nav__link">Sair</a>
+                        <center>
+                        <a href="../index.html" class="nav__link" style=" font-size:90%;">Sair</a>
+                        </center>
                     </li>
                 </ul>
 
@@ -79,12 +92,11 @@
             <img src="assets/img/home3.jpeg" alt="" class="home__img"> 
 
     <section class="subscribe section" style="margin-top:8%;"> 
-        <div class="subscribe__bg"> <div class="subscribe__container container" style="padding: 5%;"> 
-                    <h1 class="home__data-title" style="text-shadow: black 0.1em 0.1em 0.3em;">Bem-Vindo<b><br> <p> <?php echo $_SESSION['nome'];?>!</p></b></h1>
-</div>
-                </div>
-                </div>
+        <div class="subscribe__bg">
+            <div class="subscribe__container container" style="padding: 5%;"> 
+                <h1 class="home__data-title" style="text-shadow: black 0.1em 0.1em 0.3em;">Bem-Vindo<b><br> <p> <?php echo $dados["nome"];?>!</p></b></h1>
             </div>
+        </div>
         </section>
         <a href="#" class="scrollup" id="scroll-up" aria-label="scroll up">
             <i class='bx bx-up-arrow-alt scrollup__icon'></i>

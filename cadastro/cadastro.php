@@ -36,10 +36,10 @@
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
                     <li class="nav__item">
-                        <a href="inicialL.php" class="nav__link">Inicial Campus</a>
+                        <a href="inicialL.php" class="nav__link" style=" font-size:90%;">Inicial Campus</a>
                     </li>
                     <li class="nav__item">
-                        <a href="cadastro.php" class="nav__link active-link">Cadastrar Organizadores</a>
+                        <a href="cadastro.php" class="nav__link active-link" style=" font-size:90%;">Cadastro</a>
                     </li>
                     
                 </ul>

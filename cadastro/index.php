@@ -34,7 +34,7 @@
                         </li>
                         
                         <li class="nav__item">
-                            <a href="index.php" class="nav__link active-link">Campus</a>
+                            <a href="index.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link active-link">Campus</a>
                         </li>
                     </ul>
 
@@ -68,7 +68,7 @@
             </form>
             <br>
             <center>
-                <p class="clique">Não possui cadastro?<a href="campus.php"> Clique aqui</a></p>
+                <p class="clique" style="color:white;">Não possui cadastro?<a href="campus.php"> Clique aqui</a></p>
             </center>
         </div>
 </div>  

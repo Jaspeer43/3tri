@@ -8,11 +8,12 @@
     
     // $processa = isset($_POST['processa']) ? $_POST['processa'] : "";
     $processa = isset($_GET["processa"]) ? $_GET["processa"] : "";
+    $obj = isset($_GET["obj"]) ? $_GET["obj"] : "";
     if ($processa == 'editar'){
         // $id = isset($_POST['id']) ? $_POST['id'] : "";
         $id = isset($_GET['id']) ? $_GET['id'] : "";
         if ($id > 0)
-            $dados = buscarDados($id);
+            $dados = buscarDados($id, $obj);
 }
 
     $title = "Editar - Avaliador | Orientador";
@@ -39,9 +40,11 @@
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
                     <li class="nav__item">
-                        <a href="inicialL.php" class="nav__link">Inicial Campus</a>
+                        <a href="orientador.php" class="nav__link">Inicial Orientador</a>
                     </li>
-                    
+                    <li class="nav__item">
+                        <a href="edita.php" class="nav__link active-link">Editar Perfil</a>
+                    </li>
                 </ul>
 
                 <div class="nav__dark">
@@ -72,7 +75,6 @@
         <div class="subscribe__bg"> <div class="subscribe__container container" style="padding: 5%;"> 
                 <h2 class="section__title subscribe__title">Edite suas informações</h2>
 
-
     <!--
         No "processa.php", a variável $processa só recebe o valor "cadastrar" se apertar no botão "CADASTRAR". Se apertar a tecla Enter, não recebe
     -->
@@ -85,16 +87,27 @@
 
         <input type="text" name="atuacao" id="atuacao" value="<?php if ($processa == "editar") echo $dados['atuacao']; ?>" class="subscribe__form subscribe__input" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;">
 
-        <select name="edicao_id" id="edicao_id" class="subscribe__form subscribe__input" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%">
+        <!-- <select name="edicao_id" id="edicao_id" class="subscribe__form subscribe__input" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%">
                     <?php 
-                    require_once("utils.php");
-                    echo lista_edicao($obj[0]['id']);
+                    // require_once("utils.php");
+                    // echo lista_edicao($obj[0]['id']);
                     ?>
-                </select>
+                </select> -->
+            
+                <select name="edicao_id" id="edicao_id" class="subscribe__form subscribe__input" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%">
+                            <?php
+                                $pdo = Conexao::getInstance();
+                                $consulta = $pdo->query("SELECT * FROM edicao");
+                                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) { ?>
+                                <option value="<?php echo $linha['id']?> <?php if($processa == "editar" && $dados["edicao_id"] == $linha["id"]) echo "selected"; ?>">
+                                    <?php echo $linha['ano']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
 
         <select name="avor" class="subscribe__form subscribe__input" id="avor" placeholder="Selecione seu cargo" required style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;">      
-            <option name="orientador" class="subscribe__form subscribe__input" id="orientador" value="orientador">Orientador</option>
-            <option name="avaliador" class="subscribe__form subscribe__input" id="avaliador" value="avaliador">Avaliador</option>
+            <option name="orientador" class="subscribe__form subscribe__input" id="orientador" value="orientador" <?php if($processa == "editar" && $dados["avor"] == "orientador") echo "selected"; ?>>Orientador</option>
+            <option name="avaliador" class="subscribe__form subscribe__input" id="avaliador" value="avaliador" <?php if($processa == "editar" && $dados["avor"] == "avaliador") echo "selected"; ?>>Avaliador</option>
         </select>
 
         <input type="email" name="email" id="email" value="<?php if ($processa == "editar") echo $dados['email']; ?>" class="subscribe__form subscribe__input" style="padding-top: 1.5%; padding-bottom: 1.5%; margin-bottom: 2px; padding-left: 2%;">
@@ -106,7 +119,7 @@
         <button name="processa" id="processa" value="cadastrar" type="submit" style="float: left;" class="button">EDITAR</button>
 
     </form>
-    <a href="processa.php?processa=excluir&id=<?php echo $_SESSION['id'];?>">EXCLUIR</a>
+    <button class="button" style="float:right;"><a href="processa.php?id=<?php echo $_SESSION['id'];?>&processa=excluir&avor=<?php echo $obj; ?>">EXCLUIR</a></button><br>
     </section>
 
 </section>

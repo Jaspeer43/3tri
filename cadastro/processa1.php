@@ -33,17 +33,16 @@
     //chama o processa1.
     //verifica se ação do processa1 é igual à salvar.
     if ($processa1 == "cadastrar"){
-        $id = isset($_POST['id']) ? $_POST['id'] : "";
         //verifica se o ID é igual a 0, se for cria/insere novo usuário, se não edita as informações no banco.
         if ($id == 0){
             $campus = new Campus($id, $nome, $endereco, $email, $senha);
             $resultado = $campus->insere();
             header("location:index.php");
         }else {    
-            $campus = new Campus($_POST['id'], $_POST['nome'], $_POST['endereco'], $_POST['email'], $_POST['senha']);
+            $campus = new Campus($id, $nome, $endereco, $email, $senha);
             $resultado = $campus->editar();
-        }
             header("location:inicialL.php");
+        }
        
 }
 

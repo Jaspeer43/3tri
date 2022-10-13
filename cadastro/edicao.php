@@ -5,7 +5,6 @@
     session_start();
     require_once "autoload.php";
     require_once  "conf/Conexao.php";
-    require_once  "processa2.php";
     $id = isset($_GET['id']) ? $_GET['id'] : "";
     $title = "Nova Edição";
 ?>
@@ -32,10 +31,10 @@
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
                     <li class="nav__item">
-                        <a href="inicialL.php" class="nav__link">Inicial Campus</a>
+                        <a href="inicialL.php" class="nav__link" style=" font-size:90%;">Inicial Campus</a>
                     </li>
                     <li class="nav__item">
-                        <a href="edicao.php" class="nav__link active-link">Nova Edição</a>
+                        <a href="edicao.php" class="nav__link active-link" style=" font-size:90%;">Nova Edição</a>
                     </li>
                     
                 </ul>
@@ -67,9 +66,9 @@
         
         <section class="subscribe section" style="margin-top:8%;"> 
     <div class="subscribe__bg"> <div class="subscribe__container container" style="padding: 5%;"> 
-                <h2 class="section__title subscribe__title"> Crie uma nova Edição<br>Preencha os campos abaixo: </h2>
+                <h2 class="section__title subscribe__title"> Crie uma nova Edição<br>Preencha o campo abaixo: </h2>
 
-    <form method="post" action="processa2.php" class="subscribe__form">
+    <form id="form1" class="subscribe__form">
         <input type="hidden" name="id" id="id" size="25" value="0">
         <input type="text" name="ano" id="ano" required class="subscribe__input" placeholder="Insira o ano da Edição"><br>
         <input type="hidden" name="campus_id" id="campus_id" class="subscribe__input" value= "<?php echo $id;?>"><br>
@@ -79,6 +78,7 @@
 
 </section>
 
+    <section id="resposta"></section>
 
 <!--==================== FOOTER ====================-->
 
@@ -96,6 +96,11 @@
 
 <!--=============== MAIN JS ===============-->
 <script src="assets/js/main.js"></script>
+
+<script src="assets/js/jQuery/jquery.js"></script>
+
+<script src="assets/js/jquery.js"></script>
+
 </body>
 
 </html>

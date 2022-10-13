@@ -23,7 +23,7 @@
     <meta name="description"
         content="You can find the most beautiful and pleasant places at the best prices with special discounts, you choose the place we will guide you all the way to wait, get your place now.">
 
-    <title>Orientador</title>
+    <title>Avaliador</title>
 
     <body>
     <header class="header" id="header">
@@ -39,10 +39,10 @@
                         <a href="trabalho.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link">Nova Avaliação</a>
                     </li>
                     <li class="nav__item">
-                        <a href="edita.php?id=<?php echo $_SESSION['id']; ?>" class="nav__link">Editar</a>
+                        <a href="edita.php?id=<?php echo $_SESSION['id']; ?>&processa=editar&obj=avaliador" class="nav__link">Editar</a>
                     </li>
                     <li class="nav__item">
-                        <a href="../index.html" class="nav__link">Sair</a>
+                        <a href="inicialL.php" class="nav__link">Sair</a>
                     </li>
                 </ul>
 
