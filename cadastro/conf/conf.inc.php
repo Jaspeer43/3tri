@@ -4,7 +4,7 @@
     define('HOST', 'localhost');  
     define('DBNAME', 'fetec');    
     define('USER', 'root');  
-    define('PASSWORD','admin');
+    define('PASSWORD','');
 
 
     

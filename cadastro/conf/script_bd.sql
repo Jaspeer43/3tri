@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `fetec`.`trabalho` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(250) NULL,
   `descricao` VARCHAR(250) NULL,
-  `banner` BLOB NULL,
+  -- `banner` BLOB NULL,
   `pchave` VARCHAR(45) NULL, -- Novo atributo
   -- `alunos` VARCHAR(250) NULL,
   -- `curso` VARCHAR(45) NULL,
@@ -92,28 +92,6 @@ CREATE TABLE IF NOT EXISTS `fetec`.`trabalho` (
   CONSTRAINT `fk_trabalho_edicao1`
     FOREIGN KEY (`edicao_id`)
     REFERENCES `fetec`.`edicao` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
--- ------------
--- Nova tabela:
--- ------------
-
--- -----------------------------------------------------
--- Table `fetec`.`aluno`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fetec`.`aluno` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NULL,
-  `sobrenome` VARCHAR(45) NULL,
-  `curso` VARCHAR(45) NULL,
-  `turma` VARCHAR(45) NULL, -- `estagio`
-  `trabalho_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_aluno_trabalho1`
-    FOREIGN KEY (`trabalho_id`)
-    REFERENCES `fetec`.`trabalho` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -139,6 +117,30 @@ CREATE TABLE IF NOT EXISTS `fetec`.`avaliacao` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+
+-- ------------
+-- Nova tabela:
+-- ------------
+
+-- -----------------------------------------------------
+-- Table `fetec`.`aluno`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fetec`.`aluno` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NULL,
+  `sobrenome` VARCHAR(45) NULL,
+  `curso` VARCHAR(45) NULL,
+  `turma` VARCHAR(45) NULL, -- `estagio`
+  `trabalho_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_aluno_trabalho1`
+    FOREIGN KEY (`trabalho_id`)
+    REFERENCES `fetec`.`trabalho` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
 ALTER TABLE `fetec`.`orientador` 
 ADD COLUMN `email` VARCHAR(250) NOT NULL AFTER `avor`,
 ADD COLUMN `senha` VARCHAR(45) NOT NULL AFTER `email`;
@@ -146,7 +148,3 @@ ADD COLUMN `senha` VARCHAR(45) NOT NULL AFTER `email`;
 ALTER TABLE `fetec`.`avaliador` 
 ADD COLUMN `email` VARCHAR(250) NOT NULL AFTER `avor`,
 ADD COLUMN `senha` VARCHAR(45) NOT NULL AFTER `email`;
-
-ALTER TABLE `fetec`.`trabalho` 
-DROP COLUMN `banner`;
-
